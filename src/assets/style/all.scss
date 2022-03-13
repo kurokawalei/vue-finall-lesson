@@ -1,0 +1,19 @@
+@import "~bootstrap/scss/functions";
+@import "./variables";
+@import "./system";
+
+@import "~bootstrap/scss/bootstrap";
+
+
+#nav {
+    background: #eee;
+}
+
+
+
+.card-body {
+    a {
+        text-decoration: none;
+        color: #333
+    }
+}
