@@ -1,4 +1,5 @@
 <template>
+  <Loading :active="isLoading"></Loading>
   <div
     class="position-relative d-flex align-items-center justify-content-center"
     style="min-height: 400px"
@@ -20,172 +21,139 @@
   <div class="container mt-md-5 mt-3 mb-7">
     <div class="row">
       <div class="col-md-4">
-        <div
-          class="
-            accordion
-            border border-bottom border-top-0 border-start-0 border-end-0
-            mb-3
-          "
-          id="accordionExample"
-        >
-          <div class="card border-0">
-            <div
-              class="
-                card-header
-                px-0
-                py-4
-                bg-white
-                border border-bottom-0 border-top border-start-0 border-end-0
-                rounded-0
-              "
-              id="headingOne"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseOne"
+        <CAccordion>
+          <CAccordionItem :item-key="1">
+            <CAccordionHeader @click="getProducts(1, '絨毛玩具')"
+              >絨毛玩具</CAccordionHeader
             >
-              <div
-                class="d-flex justify-content-between align-items-center pe-1"
-              >
-                <h4 class="mb-0">Lorem ipsum</h4>
-                <i class="fas fa-chevron-down"></i>
-              </div>
-            </div>
-            <div
-              id="collapseOne"
-              class="collapse show"
-              aria-labelledby="headingOne"
-              data-bs-parent="#accordionExample"
+            <CAccordionBody>
+              <ul class="list-unstyled">
+                <li v-for="(item, i) in productsList" :key="i">
+                  <router-link
+                    class="py-2 d-block text-muted"
+                    :to="`/product/${item.id}`"
+                  >
+                    {{ item.title }}
+                  </router-link>
+                </li>
+              </ul>
+            </CAccordionBody>
+          </CAccordionItem>
+          <CAccordionItem :item-key="2">
+            <CAccordionHeader @click="getProducts(1, '模型')"
+              >模型</CAccordionHeader
             >
-              <div class="card-body py-0">
-                <ul class="list-unstyled">
-                  <li>
-                    <a href="#" class="py-2 d-block text-muted">Lorem ipsum</a>
-                  </li>
-                  <li>
-                    <a href="#" class="py-2 d-block text-muted">Lorem ipsum</a>
-                  </li>
-                  <li>
-                    <a href="#" class="py-2 d-block text-muted">Lorem ipsum</a>
-                  </li>
-                  <li>
-                    <a href="#" class="py-2 d-block text-muted">Lorem ipsum</a>
-                  </li>
-                  <li>
-                    <a href="#" class="py-2 d-block text-muted">Lorem ipsum</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="card border-0">
-            <div
-              class="
-                card-header
-                px-0
-                py-4
-                bg-white
-                border border-bottom-0 border-top border-start-0 border-end-0
-                rounded-0
-              "
-              id="headingTwo"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseTwo"
+            <CAccordionBody>
+              <ul class="list-unstyled">
+                <li v-for="(item, i) in productsList" :key="i">
+                  <router-link
+                    class="py-2 d-block text-muted"
+                    :to="`/product/${item.id}`"
+                  >
+                    {{ item.title }}
+                  </router-link>
+                </li>
+              </ul>
+            </CAccordionBody>
+          </CAccordionItem>
+            <CAccordionItem :item-key="3">
+            <CAccordionHeader @click="getProducts(1, '益智')"
+              >益智</CAccordionHeader
             >
-              <div
-                class="d-flex justify-content-between align-items-center pe-1"
-              >
-                <h4 class="mb-0">Lorem ipsum</h4>
-                <i class="fas fa-chevron-down"></i>
-              </div>
-            </div>
-            <div
-              id="collapseTwo"
-              class="collapse"
-              aria-labelledby="headingTwo"
-              data-bs-parent="#accordionExample"
+            <CAccordionBody>
+              <ul class="list-unstyled">
+                <li v-for="(item, i) in productsList" :key="i">
+                  <router-link
+                    class="py-2 d-block text-muted"
+                    :to="`/product/${item.id}`"
+                  >
+                    {{ item.title }}
+                  </router-link>
+                </li>
+              </ul>
+            </CAccordionBody>
+          </CAccordionItem>
+            <CAccordionItem :item-key="4">
+            <CAccordionHeader @click="getProducts(1, '抱枕')"
+              >抱枕</CAccordionHeader
             >
-              <div class="card-body py-0">
-                <ul class="list-unstyled">
-                  <li>
-                    <a href="#" class="py-2 d-block text-muted">Lorem ipsum</a>
-                  </li>
-                  <li>
-                    <a href="#" class="py-2 d-block text-muted">Lorem ipsum</a>
-                  </li>
-                  <li>
-                    <a href="#" class="py-2 d-block text-muted">Lorem ipsum</a>
-                  </li>
-                  <li>
-                    <a href="#" class="py-2 d-block text-muted">Lorem ipsum</a>
-                  </li>
-                  <li>
-                    <a href="#" class="py-2 d-block text-muted">Lorem ipsum</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="card border-0">
-            <div
-              class="
-                card-header
-                px-0
-                py-4
-                bg-white
-                border border-bottom-0 border-top border-start-0 border-end-0
-                rounded-0
-              "
-              id="headingThree"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseThree"
+            <CAccordionBody>
+              <ul class="list-unstyled">
+                <li v-for="(item, i) in productsList" :key="i">
+                  <router-link
+                    class="py-2 d-block text-muted"
+                    :to="`/product/${item.id}`"
+                  >
+                    {{ item.title }}
+                  </router-link>
+                </li>
+              </ul>
+            </CAccordionBody>
+          </CAccordionItem>
+           <CAccordionItem :item-key="5">
+            <CAccordionHeader @click="getProducts(1, '擺飾')"
+              >擺飾</CAccordionHeader
             >
-              <div
-                class="d-flex justify-content-between align-items-center pe-1"
-              >
-                <h4 class="mb-0">Lorem ipsum</h4>
-                <i class="fas fa-chevron-down"></i>
-              </div>
-            </div>
-            <div
-              id="collapseThree"
-              class="collapse"
-              aria-labelledby="headingThree"
-              data-bs-parent="#accordionExample"
+            <CAccordionBody>
+              <ul class="list-unstyled">
+                <li v-for="(item, i) in productsList" :key="i">
+                  <router-link
+                    class="py-2 d-block text-muted"
+                    :to="`/product/${item.id}`"
+                  >
+                    {{ item.title }}
+                  </router-link>
+                </li>
+              </ul>
+            </CAccordionBody>
+          </CAccordionItem>
+             <CAccordionItem :item-key="6">
+            <CAccordionHeader @click="getProducts(1, '電子玩具')"
+              >電子玩具</CAccordionHeader
             >
-              <div class="card-body py-0">
-                <ul class="list-unstyled">
-                  <li>
-                    <a href="#" class="py-2 d-block text-muted">Lorem ipsum</a>
-                  </li>
-                  <li>
-                    <a href="#" class="py-2 d-block text-muted">Lorem ipsum</a>
-                  </li>
-                  <li>
-                    <a href="#" class="py-2 d-block text-muted">Lorem ipsum</a>
-                  </li>
-                  <li>
-                    <a href="#" class="py-2 d-block text-muted">Lorem ipsum</a>
-                  </li>
-                  <li>
-                    <a href="#" class="py-2 d-block text-muted">Lorem ipsum</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+            <CAccordionBody>
+              <ul class="list-unstyled">
+                <li v-for="(item, i) in productsList" :key="i">
+                  <router-link
+                    class="py-2 d-block text-muted"
+                    :to="`/product/${item.id}`"
+                  >
+                    {{ item.title }}
+                  </router-link>
+                </li>
+              </ul>
+            </CAccordionBody>
+          </CAccordionItem>
+           <CAccordionItem :item-key="7">
+            <CAccordionHeader @click="getProducts(1, '兒童玩具')"
+              >兒童玩具</CAccordionHeader
+            >
+            <CAccordionBody>
+              <ul class="list-unstyled">
+                <li v-for="(item, i) in productsList" :key="i">
+                  <router-link
+                    class="py-2 d-block text-muted"
+                    :to="`/product/${item.id}`"
+                  >
+                    {{ item.title }}
+                  </router-link>
+                </li>
+              </ul>
+            </CAccordionBody>
+          </CAccordionItem>
+        </CAccordion>
       </div>
       <div class="col-md-8">
         <div class="row">
           <div class="col-md-6" v-for="item in productsList" :key="item.id">
             <div class="card border-0 mb-4 position-relative position-relative">
-                <router-link :to="`/product/${item.id}`">
-             
+              <router-link :to="`/product/${item.id}`">
                 <img
                   :src="item.imageUrl"
                   class="card-img-top rounded-0"
                   :alt="item.title"
                 />
-             </router-link>
+              </router-link>
               <a href="#" class="text-dark">
                 <i
                   class="far fa-heart position-absolute"
@@ -208,7 +176,7 @@
           </div>
         </div>
       </div>
-       <pageinfo :pages="pageobj" @getpage="getProducts" ></pageinfo>
+      <pageinfo :pages="pageobj" @getpage="getProducts"></pageinfo>
     </div>
   </div>
 
@@ -284,26 +252,40 @@
 
 <script>
 import pageinfo from "@/components/pageinfo.vue";
+
+import { CAccordion } from "@coreui/vue";
+import { CAccordionHeader } from "@coreui/vue";
+import { CAccordionItem } from "@coreui/vue";
+import { CAccordionBody } from "@coreui/vue";
+
 export default {
   data() {
     return {
       productsList: [],
-      pageobj:{}
+      pageobj: {},
+      visible: false,
+      isLoading:false
     };
-  },   
-  components:{
-    pageinfo
+  },
+  components: {
+    pageinfo,
+    CAccordion,
+    CAccordionHeader,
+    CAccordionItem,
+    CAccordionBody,
   },
   methods: {
-    getProducts( page = 1 ) {
-      this.$http(
-        `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/products?page=${page}`
-      )
+    getProducts(page = 1, category) {
+      this.isLoading = true;
+      let url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/products?page=${page}`;
+      if (category) {
+        url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/products?page=${page}&category=${category}`;
+      }
+      this.$http(url)
         .then((res) => {
           this.productsList = res.data.products;
-          this.pageobj= res.data.pagination;
-         
-          console.log(this.pageobj);
+          this.pageobj = res.data.pagination;
+           this.isLoading = false;
         })
         .catch((er) => {
           console.log(er);
