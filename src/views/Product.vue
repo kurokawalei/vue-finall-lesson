@@ -1,5 +1,5 @@
 <template>
-<Loading :active="isLoading"></Loading>
+  <Loading :active="isLoading"></Loading>
   <div class="container">
     <div class="row align-items-center mt-5">
       <div class="col-md-7">
@@ -37,13 +37,16 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-white px-0 mb-0 py-3">
             <li class="breadcrumb-item">
-             
               <router-link to="/" class="text-muted">首頁</router-link>
             </li>
             <li class="breadcrumb-item">
-              <router-link to="/products" class="text-muted">產品列表</router-link>
+              <router-link to="/products" class="text-muted"
+                >產品列表</router-link
+              >
             </li>
-            <li class="breadcrumb-item active" aria-current="page">{{ product.title}}</li>
+            <li class="breadcrumb-item active" aria-current="page">
+              {{ product.title }}
+            </li>
           </ol>
         </nav>
         <h2 class="fw-bold h1 mb-1">{{ product.title }}</h2>
@@ -59,12 +62,14 @@
                   class="btn btn-outline-dark border-0 py-2"
                   type="button"
                   id="button-addon1"
+                  @click="removeNum"
                 >
                   <i class="bi bi-dash"></i>
                 </button>
               </div>
               <input
                 type="text"
+                min="0"
                 class="
                   form-control
                   border-0
@@ -76,13 +81,14 @@
                 placeholder=""
                 aria-label="Example text with button addon"
                 aria-describedby="button-addon1"
-                value="1"
+                v-model="qty"
               />
               <div class="input-group-append">
                 <button
                   class="btn btn-outline-dark border-0 py-2"
                   type="button"
                   id="button-addon2"
+                  @click="addNum"
                 >
                   <i class="bi bi-plus-lg"></i>
                 </button>
@@ -93,6 +99,7 @@
             <a
               href="./checkout.html"
               class="text-nowrap btn btn-dark w-100 py-2"
+              @click.prevent="addToCat"
               >加入購物車</a
             >
           </div>
@@ -100,42 +107,19 @@
       </div>
     </div>
     <div class="row my-5">
-     {{ product.content }} 
-    </div>
-  
-  </div>
-  <div class="bg-light py-4">
-    <div class="container">
-      <div
-        class="
-          d-flex
-          flex-column flex-md-row
-          justify-content-between
-          align-items-md-center align-items-start
-        "
-      >
-        <p class="mb-0 fw-bold">Lorem ipsum dolor sit amet.</p>
-        <div class="input-group w-md-50 mt-md-0 mt-3">
-          <input type="text" class="form-control rounded-0" placeholder="" />
-          <div class="input-group-append">
-            <button class="btn btn-dark rounded-0" type="button" id="search">
-              Lorem ipsum
-            </button>
-          </div>
-        </div>
-      </div>
+      {{ product.content }}
     </div>
   </div>
- 
 </template>
 
 <script>
-
 export default {
   data() {
     return {
       product: {},
-      isLoading:false
+      id: "",
+      qty: 1,
+      isLoading: false,
     };
   },
   methods: {
@@ -156,6 +140,38 @@ export default {
         })
         .catch((er) => {
           console.log(er);
+        });
+    },
+    addNum() {
+      this.qty += 1;
+    },
+    removeNum() {
+      if (this.qty < 1) {
+        return;
+      } else {
+        this.qty -= 1;
+      }
+    },
+    addToCat() {
+      this.isLoading = true;
+
+      const { id } = this.$route.params;
+      const data = {
+        product_id: id,
+        qty: this.qty,
+      };
+
+      this.$http
+        .post(
+          `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/cart`,
+          { data }
+        )
+        .then((res) => {
+          alert(res.data.message);
+          this.isLoading = false;
+        })
+        .catch((er) => {
+          console.dir(er);
         });
     },
   },
