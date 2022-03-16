@@ -1,0 +1,29 @@
+.cart-images {
+ 
+    height: 250px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-image: url(../src/assets/images/cart.jpg);
+}
+
+.order-step-box {
+    
+    p {
+        margin: 0;
+        color: #333;
+    }
+
+    background: #eee;
+    text-align: center;
+    padding: 15px;
+
+    &.active {
+        background-color: #333;
+      
+        p {
+            color: #fff;
+        }
+    }
+
+}

@@ -1,18 +1,24 @@
 @import "~bootstrap/scss/functions";
 @import "./variables";
 @import "./system";
+@import "./cart";
 
 @import "~bootstrap/scss/bootstrap";
 
 
 #nav {
-    background: #eee;
+    background: #333;
+    .navbar-nav {
+        a {
+            color: #fff;
+        }
+    }
 }
 
 .card-body {
     a {
         text-decoration: none;
-        color: #333
+        color: #fff;
     }
 }
 
@@ -23,4 +29,13 @@
             color: #7952b3 !important;
         }
     }
+}
+
+
+.first-image {
+    background: url(https://cdn.pixabay.com/photo/2018/03/05/15/25/toys-3200969_960_720.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+   
 }

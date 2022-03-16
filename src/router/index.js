@@ -27,6 +27,12 @@ const routes = [{
   name: "購物車",
   component: () =>
     import("../views/cart.vue"),
+},
+{
+  path: "/checkout",
+  name: "訂購資訊",
+  component: () =>
+    import("../views/checkout.vue"),
 } ];
 
 const router = createRouter({

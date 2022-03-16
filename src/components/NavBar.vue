@@ -1,6 +1,6 @@
 <template>
   <div id="nav">
-    <nav class="navbar navbar-expand-lg navbar-light container">
+    <nav class="navbar navbar-expand-lg navbar-dark container-fluid">
       <router-link to="/" class="navbar-brand">黑川玩具店</router-link>
       <button
         class="navbar-toggler"
@@ -14,7 +14,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div
-        class="collapse navbar-collapse justify-content-end"
+        class="collapse navbar-collapse justify-content-end pe-5"
         id="navbarNavAltMarkup"
       >
         <div class="navbar-nav">
