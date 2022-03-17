@@ -2,15 +2,28 @@
   <NavBar></NavBar>
   <router-view />
   <Footer></Footer>
+  <ToastMessages></ToastMessages>
 </template>
 
 <script>
+import emitter from '@/libs/mitter';
 import NavBar from "@/components/NavBar.vue";
 import Footer from "@/components/footer.vue";
+import ToastMessages from '@/components/ToastMessages.vue';
+
+
+
+
 export default {
+  provide(){
+    return{
+      emitter,
+    }
+  },
   components: {
     NavBar,
     Footer,
+    ToastMessages
   },
 };
 </script>

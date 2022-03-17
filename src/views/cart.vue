@@ -185,7 +185,7 @@
               <p class="mb-0 h5 fw-bold">NT${{ carData.total }}元</p>
             </div>
             <div class="mt-2 h5 text-end text-success" v-if="isCoupon">
-              折扣價：NT${{ Math.trunc(carData.final_total)  }}元
+              折扣價：NT${{ Math.trunc(carData.final_total) }}元
             </div>
             <router-link to="/checkout" class="btn btn-dark w-100 mt-4"
               >下一步</router-link
@@ -302,6 +302,17 @@
 
 
 <script>
+import Swal from "sweetalert2";
+
+//宣告toast
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+});
+
 export default {
   data() {
     return {
@@ -342,7 +353,14 @@ export default {
           console.log(res);
           this.getCarList();
           this.isLoading = false;
-          alert(res.data.message);
+
+          Toast.fire({
+            icon: "success",
+            showClass: {
+              popup: "animate__animated animate__fadeIn",
+            },
+            title: res.data.message,
+          });
         })
         .catch((er) => {
           console.log(er);
@@ -355,10 +373,15 @@ export default {
           `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/cart/${item}`
         )
         .then((res) => {
-          console.log(res);
-          this.isLoading = false;
-          alert(res.data.message);
           this.getCarList();
+          this.isLoading = false;
+          Toast.fire({
+            icon: "success",
+            showClass: {
+              popup: "animate__animated animate__fadeIn",
+            },
+            title: res.data.message,
+          });
         })
         .catch((er) => {
           console.log(er);
@@ -369,28 +392,38 @@ export default {
       console.log(num);
 
       let data = {
-    
-          code: this.code,
-       
+        code: this.code,
       };
 
-       this.$http
+      this.$http
         .post(
-          `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/coupon`, { data } )
+          `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/coupon`,
+          { data }
+        )
         .then((res) => {
-          console.log(res);
-            this.isCoupon = true;
-          alert(res.data.message);
-          this.code="";
-        
-         
-        })
-        .catch((er) => {
-          console.log(er);
-        });
+          this.isCoupon = true;
+          Toast.fire({
+            icon: "success",
+            showClass: {
+              popup: "animate__animated animate__fadeIn",
+            },
+            title: res.data.message,
+          });
+          this.code = "";
 
-        
-    
+          this.getCarList();
+
+          // console.log(res.data.data.final_total)
+        })
+        .catch(() => {
+          Toast.fire({
+            icon: "error",
+            showClass: {
+              popup: "animate__animated animate__fadeIn",
+            },
+            title: "無效的優惠碼",
+          });
+        });
 
       // https://vue3-course-api.hexschool.io/v2/api/kurokawa2021/coupon
       //  this.isCoupon = true;
@@ -401,3 +434,4 @@ export default {
   },
 };
 </script>
+

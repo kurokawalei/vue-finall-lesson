@@ -33,6 +33,12 @@ const routes = [{
   name: "訂購資訊",
   component: () =>
     import("../views/checkout.vue"),
+},
+{
+  path: "/pay/:id",
+  name: "付款頁面",
+  component: () =>
+    import("../views/payView.vue"),
 } ];
 
 const router = createRouter({

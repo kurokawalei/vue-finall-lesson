@@ -13,24 +13,6 @@
               <img :src="product.imageUrl" class="d-block w-100" alt="..." />
             </div>
           </div>
-          <a
-            class="carousel-control-prev"
-            href="#carouselExampleControls"
-            role="button"
-            data-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a
-            class="carousel-control-next"
-            href="#carouselExampleControls"
-            role="button"
-            data-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
         </div>
       </div>
       <div class="col-md-5">
@@ -81,7 +63,7 @@
                 placeholder=""
                 aria-label="Example text with button addon"
                 aria-describedby="button-addon1"
-                v-model="qty"
+                v-model.number="qty"
               />
               <div class="input-group-append">
                 <button
@@ -113,6 +95,17 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
+
+//宣告toast
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 2500,
+  timerProgressBar: true,
+});
+
 export default {
   data() {
     return {
@@ -167,8 +160,15 @@ export default {
           { data }
         )
         .then((res) => {
-          alert(res.data.message);
           this.isLoading = false;
+
+          Toast.fire({
+            icon: "success",
+            showClass: {
+              popup: "animate__animated animate__fadeIn",
+            },
+            title: res.data.message,
+          });
         })
         .catch((er) => {
           console.dir(er);

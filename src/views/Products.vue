@@ -241,7 +241,7 @@ export default {
         .then((res) => {
           this.productsList = res.data.products;
           this.pageobj = res.data.pagination;
-           this.isLoading = false;
+          this.isLoading = false;
         })
         .catch((er) => {
           console.log(er);
