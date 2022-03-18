@@ -198,13 +198,14 @@ export default {
             },
             title: res.data.message,
           });
+            this.getPayinfo();
           this.isLoading = false;
         })
         .catch((er) => {
           console.log(er);
         });
 
-      this.getPayinfo();
+    
     },
   },
   mounted() {

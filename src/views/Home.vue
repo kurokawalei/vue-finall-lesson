@@ -1,12 +1,13 @@
 <template>
+  <Loading :active="isLoading"></Loading>
   <div class="position-relative first-image">
     <div class="container d-flex flex-column" style="min-height: 100vh">
       <div class="row justify-content-center my-auto">
         <div class="col-md-4 text-center">
           <h2>The Dreams</h2>
           <p class="text-muted mb-0">
-          在這裡，年齡不是界限，快樂才是追求。<br>
-           只要走進來，都可以尋找到屬於你的快樂！
+            在這裡，年齡不是界限，快樂才是追求。<br />
+            只要走進來，都可以尋找到屬於你的快樂！
           </p>
           <button class="btn btn-dark rounded-0 mt-6">開始逛逛</button>
         </div>
@@ -196,51 +197,24 @@
       </div>
     </div>
   </div>
-  <div class="bg-dark py-5">
-    <div class="container">
-      <div
-        class="
-          d-flex
-          align-items-center
-          justify-content-between
-          text-white
-          mb-md-7 mb-4
-        "
-      >
-        <a class="text-white h4" href="./index.html">LOGO</a>
-        <ul class="d-flex list-unstyled mb-0 h4">
-          <li>
-            <a href="#" class="text-white mx-3"
-              ><i class="fab fa-facebook"></i
-            ></a>
-          </li>
-          <li>
-            <a href="#" class="text-white mx-3"
-              ><i class="fab fa-instagram"></i
-            ></a>
-          </li>
-          <li>
-            <a href="#" class="text-white ms-3"><i class="fab fa-line"></i></a>
-          </li>
-        </ul>
-      </div>
-      <div
-        class="
-          d-flex
-          flex-column flex-md-row
-          justify-content-between
-          align-items-md-end align-items-start
-          text-white
-        "
-      >
-        <div class="mb-md-0 mb-1">
-          <p class="mb-0">02-3456-7890</p>
-          <p class="mb-0">service@mail.com</p>
-        </div>
-        <p class="mb-0">© 2020 LOGO All Rights Reserved.</p>
-      </div>
-    </div>
-  </div>
+ 
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
+  methods: {},
+  mounted() {
+    this.isLoading = true;
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
+  },
+};
+</script>
 
 

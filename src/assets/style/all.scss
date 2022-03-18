@@ -7,12 +7,25 @@
 
 
 #nav {
-    background: #333;
+    background-color: #7952b3;
+    
+  
     .navbar-nav {
         a {
             color: #fff;
         }
     }
+
+    #dropdownMenuButton1 {
+        &:hover {
+            background-color: transparent;
+            border-color: transparent;
+        }
+        &:focus {
+            background-color: transparent;
+        }
+    }
+   
 }
 
 .card-body {

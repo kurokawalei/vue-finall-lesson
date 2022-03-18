@@ -1,6 +1,9 @@
 import { createApp } from "vue";
+
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap';
 import '@coreui/coreui/dist/css/coreui.min.css'
+
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 // Import component
