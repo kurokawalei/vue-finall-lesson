@@ -22,6 +22,7 @@
       >
         <div class="navbar-nav">
           <router-link to="/" class="nav-item nav-link">首頁</router-link>
+            <router-link to="/article" class="nav-item nav-link">文章</router-link>
           <router-link to="/products" class="nav-item nav-link"
             >產品列表</router-link
           >

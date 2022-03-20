@@ -36,9 +36,11 @@
           text-white
         "
       >
+     
         <div class="mb-md-0 mb-1">
           <p class="mb-0">02-3456-7890</p>
           <p class="mb-0">service@mail.com</p>
+          <p class="mb-0"><router-link to="/login">後台燈入</router-link></p>
         </div>
         <p class="mb-0">© 2020 LOGO All Rights Reserved.</p>
       </div>

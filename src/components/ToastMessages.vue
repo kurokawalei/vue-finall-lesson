@@ -1,6 +1,6 @@
 <template>
 
-<div style="z-index:1500" class="position-fixed end-0 pe-3">
+<div style="z-index:1500" class="position-fixed top-0 end-0 pe-3">
 
     
 
@@ -38,13 +38,15 @@
 </template>
 
 <script>
+import emitter from '@/libs/mitter';
+
 export default {
   data() {
     return {
       message: [],
     };
   },
-  inject:['emitter'],
+  
   methods: {
     toastShow() {
       setTimeout(() => {
@@ -53,7 +55,7 @@ export default {
     },
   },
   mounted() {
-    this.emitter.on("push-message", (message) => {
+    emitter.on("push-message", (message) => {
       const { style = "success", title, content } = message;
       this.message.push({ style, title, content });
       this.toastShow();
