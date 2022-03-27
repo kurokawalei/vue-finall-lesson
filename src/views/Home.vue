@@ -9,67 +9,34 @@
             在這裡，年齡不是界限，快樂才是追求。<br />
             只要走進來，都可以尋找到屬於你的快樂！
           </p>
-          <button class="btn btn-dark rounded-0 mt-6">開始逛逛</button>
+        
+          <router-link class="btn btn-dark rounded-0 mt-6" to="/products">開始逛逛</router-link>
         </div>
       </div>
     </div>
   </div>
   <div class="container">
     <div class="row mt-5">
-      <div class="col-md-4 mt-md-4">
-        <div class="card border-0 mb-4">
+      <div class="article-box col-md-4 mt-md-4" v-for="item in articleList" :key="item.id">
+        <div class="card border-0 mb-4" >
+          <router-link :to="`/article/${item.id}`">
           <img
-            src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80"
+            :src="item.imageUrl"
             class="card-img-top rounded-0"
-            alt="..."
+            :alt="item.title"
           />
+          </router-link>
           <div class="card-body text-center">
-            <h4>Lorem ipsum</h4>
+            <h4>{{item.title}}</h4>
             <div class="d-flex justify-content-between">
               <p class="card-text text-muted mb-0">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod.
+                {{item.description}}
               </p>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4 mt-md-4">
-        <div class="card border-0 mb-4">
-          <img
-            src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80"
-            class="card-img-top rounded-0"
-            alt="..."
-          />
-          <div class="card-body text-center">
-            <h4>Lorem ipsum</h4>
-            <div class="d-flex justify-content-between">
-              <p class="card-text text-muted mb-0">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mt-md-4">
-        <div class="card border-0 mb-4">
-          <img
-            src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80"
-            class="card-img-top rounded-0"
-            alt="..."
-          />
-          <div class="card-body text-center">
-            <h4>Lorem ipsum</h4>
-            <div class="d-flex justify-content-between">
-              <p class="card-text text-muted mb-0">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+    
     </div>
   </div>
   <div class="bg-light mt-7">
@@ -205,14 +172,38 @@ export default {
   data() {
     return {
       isLoading: false,
+      articleList:[],
+      pageobj:{}
     };
   },
-  methods: {},
+  methods: {
+
+   getArticle(page = 1) {
+      this.isLoading = true;
+      let url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/articles?page=${page}`;
+
+      this.$http(url)
+        .then((res) => {
+          this.articleList = res.data.articles;
+          this.pageobj = res.data.pagination;
+          this.isLoading = false;
+          this.articleList.length = 3;
+          console.log(this.articleList);
+        })
+        .catch((er) => {
+          console.log(er);
+        });
+    },
+
+  },
   mounted() {
+
     this.isLoading = true;
     setTimeout(() => {
       this.isLoading = false;
     }, 1000);
+
+    this.getArticle();
   },
 };
 </script>

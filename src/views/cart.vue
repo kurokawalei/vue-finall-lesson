@@ -303,6 +303,7 @@
 
 <script>
 import Swal from "sweetalert2";
+import emitter from "@/libs/mitter.js";
 
 //宣告toast
 const Toast = Swal.mixin({
@@ -373,8 +374,10 @@ export default {
           `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/cart/${item}`
         )
         .then((res) => {
-          this.getCarList();
+        
           this.isLoading = false;
+          emitter.emit('get-cart'); //傳給外面
+            this.getCarList();
           Toast.fire({
             icon: "success",
             showClass: {

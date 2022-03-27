@@ -96,6 +96,7 @@
 
 <script>
 import Swal from "sweetalert2";
+import emitter from "@/libs/mitter.js";
 
 //宣告toast
 const Toast = Swal.mixin({
@@ -147,7 +148,6 @@ export default {
     },
     addToCat() {
       this.isLoading = true;
-
       const { id } = this.$route.params;
       const data = {
         product_id: id,
@@ -161,6 +161,7 @@ export default {
         )
         .then((res) => {
           this.isLoading = false;
+          emitter.emit('get-cart'); //傳給外面
 
           Toast.fire({
             icon: "success",

@@ -64,7 +64,7 @@
                 bg-danger
               "
             >
-              {{ cartData.carts.length }}
+              {{ cartData?.carts?.length }}
             </span>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="min-width: 400px;">
               <li
@@ -93,7 +93,7 @@ export default {
   data() {
     return {
       cartData: {
-        carts: [],
+       
       },
     };
   },
@@ -105,7 +105,7 @@ export default {
       )
         .then((res) => {
           this.cartData = res.data.data;
-          emitter.emit("get-cart");
+        
         })
         .catch((er) => {
           console.log(er);

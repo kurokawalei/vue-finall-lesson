@@ -36,14 +36,36 @@
                 />
               </div>
               <div class="mb-3">
-                <label for="image" class="form-label">輸入圖片網址</label>
+                <!-- <label for="image" class="form-label">輸入圖片網址</label>
                 <input
                   type="text"
                   class="form-control"
                   id="image"
                   v-model="tempArticle.imageUrl"
                   placeholder="請輸入圖片連結"
+                /> -->
+
+                 <div class="mb-3">
+                <label for="uploadImg" class="form-label">新增主圖</label>
+                <input
+                  type="file"
+                  class="form-control mb-3"
+                  id="uploadImg"
+                  ref="pathClear"
+                  @change="upload('main', $event)"
                 />
+                <img class="img-fluid mb-3" :src="tempArticle.imageUrl" />
+                <button
+                  class="btn btn-outline-danger btn-sm d-block w-100"
+                  v-if="tempArticle.imageUrl"
+                  @click="tempArticle.imageUrl = ''"
+                >
+                  刪除檔案
+                </button>
+              </div>
+
+
+               
               </div>
               <div class="mb-3">
                 <label for="author" class="form-label">作者</label>
@@ -198,6 +220,7 @@ export default {
     return {
       tempArticle: {
         tag: [""],
+        imageUrl:''
       },
       articleModal: "",
       createAt: 0,
@@ -258,6 +281,57 @@ export default {
     closeArticleModal() {
       // 關閉新增、編輯文章 modal
       this.articleModal.hide();
+    },
+     upload(isMain, event) {
+      //圖片上傳
+      console.dir(event);
+      const file = event.target.files[0];
+      //console.log(file);
+      const formData = new FormData();
+      formData.append("file-to-upload", file);
+      //console.log( formData)
+      this.$http
+        .post(
+          `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/admin/upload`,
+          formData
+        )
+        .then((res) => {
+          if (isMain === "main") {
+            this.tempArticle.imageUrl = res.data.imageUrl;
+            this.$refs.pathClear.value = "";
+            this.emitter.emit("push-message", {
+              style: "success",
+              title: "已更新",
+              content: res.data.message,
+            });
+          } else if (
+            isMain === "sub" &&
+            !Array.isArray(this.tempProduct.imagesUrl)
+          ) {
+            this.tempProduct.imagesUrl = [];
+            this.tempProduct.imagesUrl.push(res.data.imageUrl);
+            this.$refs.pathesClear.value = "";
+            this.emitter.emit("push-message", {
+              style: "success",
+              title: "已更新",
+              content: res.data.message,
+            });
+          } else if (
+            isMain === "sub" &&
+            Array.isArray(this.tempProduct.imagesUrl)
+          ) {
+            this.tempProduct.imagesUrl.push(res.data.imageUrl);
+            this.$refs.pathesClear.value = "";
+            this.emitter.emit("push-message", {
+              style: "success",
+              title: "已更新",
+              content: res.data.message,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   mounted() {

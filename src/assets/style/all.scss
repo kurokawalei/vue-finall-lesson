@@ -2,6 +2,8 @@
 @import "./variables";
 @import "./system";
 @import "./cart";
+@import "./article";
+
 
 @import "~bootstrap/scss/bootstrap";
 
@@ -69,6 +71,5 @@
     background: url(https://cdn.pixabay.com/photo/2018/03/05/15/25/toys-3200969_960_720.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-
-
 }
+
