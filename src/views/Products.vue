@@ -11,13 +11,16 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background-image: url(https://images.unsplash.com/photo-1480399129128-2066acb5009e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80);
+        background-image: url(https://1.bp.blogspot.com/-U28DM8cXUdY/YA90PmpW_GI/AAAAAAAAEJg/1N99BGUFJuoE9N8oAWdX1Hf5p4mmgtmhACPcBGAYYCw/s1600/IMG_3348.jpg);
         background-position: center center;
-        opacity: 0.1;
+        opacity: 0.25;
+        background-repeat: no-repeat;
+        background-size: cover;
       "
     ></div>
-    <h2 class="fw-bold">Lorem ipsum.</h2>
+    <h2 class="fw-bold">產品列表</h2>
   </div>
+
   <div class="container mt-md-5 mt-3 mb-7">
     <div class="row">
       <div class="col-md-4">
@@ -56,7 +59,7 @@
               </ul>
             </CAccordionBody>
           </CAccordionItem>
-            <CAccordionItem :item-key="3">
+          <CAccordionItem :item-key="3">
             <CAccordionHeader @click="getProducts(1, '益智')"
               >益智</CAccordionHeader
             >
@@ -73,7 +76,7 @@
               </ul>
             </CAccordionBody>
           </CAccordionItem>
-            <CAccordionItem :item-key="4">
+          <CAccordionItem :item-key="4">
             <CAccordionHeader @click="getProducts(1, '抱枕')"
               >抱枕</CAccordionHeader
             >
@@ -90,7 +93,7 @@
               </ul>
             </CAccordionBody>
           </CAccordionItem>
-           <CAccordionItem :item-key="5">
+          <CAccordionItem :item-key="5">
             <CAccordionHeader @click="getProducts(1, '擺飾')"
               >擺飾</CAccordionHeader
             >
@@ -107,7 +110,7 @@
               </ul>
             </CAccordionBody>
           </CAccordionItem>
-             <CAccordionItem :item-key="6">
+          <CAccordionItem :item-key="6">
             <CAccordionHeader @click="getProducts(1, '電子玩具')"
               >電子玩具</CAccordionHeader
             >
@@ -124,7 +127,7 @@
               </ul>
             </CAccordionBody>
           </CAccordionItem>
-           <CAccordionItem :item-key="7">
+          <CAccordionItem :item-key="7">
             <CAccordionHeader @click="getProducts(1, '兒童玩具')"
               >兒童玩具</CAccordionHeader
             >
@@ -202,7 +205,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 
@@ -220,7 +222,7 @@ export default {
       productsList: [],
       pageobj: {},
       visible: false,
-      isLoading:false
+      isLoading: false,
     };
   },
   components: {
