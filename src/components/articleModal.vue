@@ -187,6 +187,9 @@
 <script>
 import Modal from "bootstrap/js/dist/modal";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
+//編輯器語系
+import '@ckeditor/ckeditor5-build-classic/build/translations/zh';
 import MyUploadAdapter from "@/methods/uploadImg.js"
 
 
@@ -227,8 +230,11 @@ export default {
       // CKEditor 文字編輯器
       editor: ClassicEditor,
       editorConfig: {
-        //toolbar: ["heading", "bold", "italic", "|", "link"],
-       extraPlugins:[MyCustomUploadAdapterPlugin]
+      // toolbar: ["heading", "bold", "italic", "fontColor","|", "link","uploadImage"],
+       toolbar: ['heading', 'bold', 'fontSize', 'fontColor', 'italic' ,'blockquote', 'link', '|','insertTable','uploadImage' ,'numberedList', 'bulletedList','HtmlEmbed', '|', 'undo', 'redo'],
+       extraPlugins:[MyCustomUploadAdapterPlugin],
+       language:'zh'
+     
       
       },
     };
@@ -346,5 +352,10 @@ export default {
 }
 .ck-editor__editable {
   min-height: 200px;
+}
+/* 主要是 link 功能與 Modal 的 focus 有衝突 */
+:root {
+    --ck-z-default: 100;
+    --ck-z-modal: calc( var(--ck-z-default) + 999 );
 }
 </style>
