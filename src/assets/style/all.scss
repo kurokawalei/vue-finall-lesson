@@ -73,3 +73,34 @@
     background-size: cover;
 }
 
+.h-title {
+    position: relative;
+    display: inline-block;
+    &:before{
+
+        content: "";
+        width: 20px;
+        height: 90%;
+        background-color: #7952b3;
+        left: -35px;
+        position: absolute;
+    }
+}
+
+
+.swiper-box {
+    margin: 50px 0;
+
+    img {
+        object-fit: cover;
+        height: 500px;
+    }
+}
+
+.info {
+    ul {
+        margin-top: 15px;
+        list-style-type: auto;
+        font-size: $font*1.2;
+    }
+}

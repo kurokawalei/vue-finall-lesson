@@ -9,106 +9,81 @@
             在這裡，年齡不是界限，快樂才是追求。<br />
             只要走進來，都可以尋找到屬於你的快樂！
           </p>
-        
-          <router-link class="btn btn-dark rounded-0 mt-6" to="/products">開始逛逛</router-link>
+
+          <router-link class="btn btn-dark rounded-0 mt-6" to="/products"
+            >開始逛逛</router-link
+          >
         </div>
       </div>
     </div>
   </div>
   <div class="container">
+    <div class="text-center mt-5">
+      <h2 class="h-title">最新文章</h2>
+    </div>
     <div class="row mt-5">
-      <div class="article-box col-md-4 mt-md-4" v-for="item in articleList" :key="item.id">
-        <div class="card border-0 mb-4" >
+      <div
+        class="article-box col-md-4 mt-md-4"
+        v-for="item in articleList"
+        :key="item.id"
+      >
+        <div class="card border-0 mb-4">
           <router-link :to="`/article/${item.id}`">
-          <img
-            :src="item.imageUrl"
-            class="card-img-top rounded-0"
-            :alt="item.title"
-          />
+            <img
+              :src="item.imageUrl"
+              class="card-img-top rounded-0"
+              :alt="item.title"
+            />
           </router-link>
           <div class="card-body text-center">
-            <h4>{{item.title}}</h4>
+            <h4>{{ item.title }}</h4>
             <div class="d-flex justify-content-between">
               <p class="card-text text-muted mb-0">
-                {{item.description}}
+                {{ item.description }}
               </p>
             </div>
           </div>
         </div>
       </div>
-    
     </div>
   </div>
-  <div class="bg-light mt-7">
+  <div class="bg-light mt-7 pt-5 pb-5">
     <div class="container">
-      <div
-        id="carouselExampleControls"
-        class="carousel slide"
-        data-ride="carousel"
-      >
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="row justify-content-center py-7">
-              <div class="col-md-6 text-center">
-                <h3>Lorem ipsum.</h3>
-                <p class="my-5">
-                  “Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat.”
-                </p>
-                <p><small>—Lorem ipsum dolor sit amet.—</small></p>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row justify-content-center py-7">
-              <div class="col-md-6 text-center">
-                <h3>Lorem ipsum.</h3>
-                <p class="my-5">
-                  “Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat.”
-                </p>
-                <p><small>—Lorem ipsum dolor sit amet.—</small></p>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row justify-content-center py-7">
-              <div class="col-md-6 text-center">
-                <h3>Lorem ipsum.</h3>
-                <p class="my-5">
-                  “Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat.”
-                </p>
-                <p><small>—Lorem ipsum dolor sit amet.—</small></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <a
-          class="carousel-control-prev"
-          href="#carouselExampleControls"
-          role="button"
-          data-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a
-          class="carousel-control-next"
-          href="#carouselExampleControls"
-          role="button"
-          data-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
+      <div class="text-center">
+        <h2 class="h-title">最新產品</h2>
       </div>
+
+      <swiper
+        :slides-per-view="1"
+        :space-between="50"
+        :modules="modules"
+        :pagination="{ clickable: true }"
+        :autoplay="{
+          delay: 2500,
+          disableOnInteraction: false,
+        }"
+        class="swiper-box"
+      >
+        <swiper-slide v-for="item in productsList" :key="item.id">
+          <div class="row">
+            <div class="col-md-8">
+              <img :src="item.imageUrl" class="img-fluid" />
+            </div>
+            <div class="col-md-4 align-self-center text-center">
+              <p class="h2 fs-3 mb-3">{{ item.title }}</p>
+              <p>{{ item.content }}</p>
+              <router-link
+                class="btn btn-outline-primary btn-lg"
+                :to="`/product/${item.id}`"
+                >我要購買</router-link
+              >
+            </div>
+          </div>
+        </swiper-slide>
+      </swiper>
     </div>
   </div>
-  <div class="container my-7">
+  <!-- <div class="container my-7">
     <div class="row">
       <div class="col-md-6">
         <img
@@ -141,45 +116,35 @@
         </p>
       </div>
     </div>
-  </div>
-  <div class="bg-light py-4">
-    <div class="container">
-      <div
-        class="
-          d-flex
-          flex-column flex-md-row
-          justify-content-between
-          align-items-md-center align-items-start
-        "
-      >
-        <p class="mb-0 fw-bold">Lorem ipsum dolor sit amet.</p>
-        <div class="input-group w-md-50 mt-md-0 mt-3">
-          <input type="text" class="form-control rounded-0" placeholder="" />
-          <div class="input-group-append">
-            <button class="btn btn-dark rounded-0" type="button" id="search">
-              Lorem ipsum
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
- 
+  </div> -->
 </template>
 
 <script>
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from "swiper/vue/swiper-vue";
+import { Autoplay, Pagination } from "swiper";
+
+// Import Swiper styles
+import "swiper/swiper.scss";
+//import "swiper/modules/navigation/navigation.min.css";
+import "swiper/modules/pagination/pagination.min.css";
+
 export default {
   data() {
     return {
       isLoading: false,
-      articleList:[],
-      pageobj:{}
+      articleList: [],
+      productsList: [],
+      pageobj: {},
+      modules: [Autoplay, Pagination],
     };
   },
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
   methods: {
-
-   getArticle(page = 1) {
-      this.isLoading = true;
+    getArticle(page = 1) {
       let url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/articles?page=${page}`;
 
       this.$http(url)
@@ -194,16 +159,29 @@ export default {
           console.log(er);
         });
     },
-
+    getProducts(page = 1, category) {
+      let url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/products?page=${page}`;
+      if (category) {
+        url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/products?page=${page}&category=${category}`;
+      }
+      this.$http(url)
+        .then((res) => {
+          this.productsList = res.data.products;
+          this.productsList.length = 5;
+        })
+        .catch((er) => {
+          console.log(er);
+        });
+    },
   },
   mounted() {
-
     this.isLoading = true;
     setTimeout(() => {
       this.isLoading = false;
     }, 1000);
 
     this.getArticle();
+    this.getProducts();
   },
 };
 </script>
