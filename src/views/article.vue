@@ -10,7 +10,7 @@
    
   </div>
   <div class="container mt-md-5 mt-3 mb-7">
-    <div class="row row-cols-4">
+    <div class="row row-cols-1 row-cols-md-4">
       <div class="col mb-3" v-for="item in articleList" :key="item">
         <div class="card" >
           <img :src="item.imageUrl" class="card-img-top img-fluid" :alt="item.title" style="width: 300px; height: 200px; object-fit: cover">

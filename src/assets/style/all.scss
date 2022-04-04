@@ -31,6 +31,23 @@
 
 }
 
+.navbar-nav .dropdown-menu {
+    @include mob(){
+        min-width: 100% !important;
+    }
+}
+
+div#navbarNavAltMarkup {
+    padding-right: 0 !important;
+}
+
+span.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-danger {
+    right: 0 !important;
+    left: inherit !important;
+    top: 18px !important;
+
+}
+
 .card-body {
     a {
         text-decoration: none;
@@ -90,10 +107,24 @@
 
 .swiper-box {
     margin: 50px 0;
+    @include mob(){
+        margin: 0;
+        padding: 50px 0;
+    }
 
     img {
         object-fit: cover;
         height: 500px;
+        @include mob(){
+            height: auto;
+        }
+    }
+}
+
+.swiper-wrapper {
+    padding-bottom: 50px;
+    p {
+        margin-top: 10px;
     }
 }
 

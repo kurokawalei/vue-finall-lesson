@@ -12,7 +12,7 @@
 
   <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
-      <div class="col-8">
+      <div class="col-md-8 col-10">
         <div class="h1 mb-3">{{ article.title }}</div>
 
         <div class="main" v-html="article.content"></div>
