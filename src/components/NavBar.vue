@@ -4,7 +4,9 @@
       class="navbar navbar-expand-lg navbar-dark container"
       style="background-image: none"
     >
-      <router-link to="/" class="navbar-brand">黑川玩具店</router-link>
+      <router-link to="/" class="navbar-brand">
+      <img src="../../src/assets/images/logo.png" width="250" class="img-fluid">
+      </router-link>
       <button
         class="navbar-toggler"
         type="button"

@@ -10,7 +10,9 @@
           mb-md-7 mb-4
         "
       >
-        <a class="text-white h4" href="./index.html">LOGO</a>
+        <a class="text-white h4" href="./index.html">
+          <img src="../../src/assets/images/logo.png" width="250" class="img-fluid">
+        </a>
         <ul class="d-flex list-unstyled mb-0 h4">
           <li>
             <a href="#" class="text-white mx-3"

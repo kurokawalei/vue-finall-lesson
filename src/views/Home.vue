@@ -2,15 +2,15 @@
   <Loading :active="isLoading"></Loading>
   <div class="position-relative first-image">
     <div class="container d-flex flex-column" style="min-height: 100vh">
-      <div class="row justify-content-center my-auto">
-        <div class="col-md-4 text-center">
+      <div class="row justify-content-center mt-7">
+        <div class="col-md-6 text-center fs-2">
           <h2>The Dreams</h2>
           <p class="text-muted mb-0">
             在這裡，年齡不是界限，快樂才是追求。<br />
             只要走進來，都可以尋找到屬於你的快樂！
           </p>
 
-          <router-link class="btn btn-dark rounded-0 mt-6" to="/products"
+          <router-link class="fs-3 btn btn-dark rounded-0 mt-6" to="/products"
             >開始逛逛</router-link
           >
         </div>
@@ -61,6 +61,16 @@
         :autoplay="{
           delay: 2500,
           disableOnInteraction: false,
+        }"
+        :breakpoints=" {
+        767: {
+          slidesPerView: 1,
+          spaceBetween: 20
+        },
+         768: {
+          slidesPerView: 1,
+          spaceBetween: 20
+        },
         }"
         class="swiper-box"
       >

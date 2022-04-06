@@ -9,14 +9,16 @@
 
 
 #nav {
-    background-color: #7952b3;
-
+  
 
     .navbar-nav {
         a {
             color: #fff;
+            font-size: $font*1.25;
         }
     }
+
+
 
     #dropdownMenuButton1 {
         &:hover {
@@ -31,6 +33,12 @@
 
 }
 
+.dropdown {
+    button {
+        font-size: $font*1.25;
+    }
+}
+
 .navbar-nav .dropdown-menu {
     @include mob(){
         min-width: 100% !important;
@@ -38,13 +46,18 @@
 }
 
 div#navbarNavAltMarkup {
-    padding-right: 0 !important;
+    @include mob(){
+        padding-right: 0 !important;
+    }
+ 
 }
 
 span.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-danger {
+   @include mob(){
     right: 0 !important;
     left: inherit !important;
     top: 18px !important;
+   }
 
 }
 
@@ -78,16 +91,17 @@ span.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-da
         text-decoration: none;
 
         &:hover {
-            color: #7952b3 !important;
+            color: #3f51b5 !important;
         }
     }
 }
 
 
 .first-image {
-    background: url(https://cdn.pixabay.com/photo/2018/03/05/15/25/toys-3200969_960_720.jpg);
+    background: url(https://upload.cc/i1/2022/04/06/CyVseu.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: bottom center;
 }
 
 .h-title {
@@ -98,7 +112,7 @@ span.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-da
         content: "";
         width: 20px;
         height: 90%;
-        background-color: #7952b3;
+        background-color: #3f51b5;
         left: -35px;
         position: absolute;
     }
