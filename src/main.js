@@ -72,6 +72,9 @@ app.component('Field', Field)
 app.component('ErrorMessage', ErrorMessage)
 app.component('Loading', Loading)
 app.use(CKEditor);
+
 app.component(Swal)
 app.use(router);
+
+
 app.mount("#app");

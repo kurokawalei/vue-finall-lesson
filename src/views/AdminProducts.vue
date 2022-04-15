@@ -6,7 +6,7 @@
     </div>
   <div class="container">
     <div class="text-end mt-4">
-      <button class="btn btn-primary" @click="openModal('add')">
+      <button class="btn btn-primary text-white" @click="openModal('add')">
         建立新的產品
       </button>
     </div>

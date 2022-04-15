@@ -24,25 +24,32 @@
             aria-label="Close"
           ></button>
         </div>
+
         <div class="modal-body">
           <div class="row">
             <div class="col-sm-4">
               <div class="mb-3">
                 <label for="uploadImg" class="form-label">新增主圖</label>
+
                 <input
+                  accept="image/*"
                   type="file"
                   class="form-control mb-3"
                   id="uploadImg"
                   ref="pathClear"
                   @change="upload('main', $event)"
                 />
+
                 <img class="img-fluid mb-3" :src="tempProduct.imageUrl" />
+
+                圖片寬度為:{{ width }}
+
                 <button
                   class="btn btn-outline-danger btn-sm d-block w-100"
                   v-if="tempProduct.imageUrl"
                   @click="tempProduct.imageUrl = ''"
                 >
-                  刪除檔案
+                  刪除
                 </button>
               </div>
               <!-- 多圖設置 file選擇檔案 -->
@@ -187,15 +194,11 @@
                     style="height: 100px"
                   ></textarea>
 
-                   <!-- <ckeditor                 
+                  <!-- <ckeditor                 
                   :editor="editor"
                   :config="editorConfig"
                   v-model="tempProduct.content"
                 ></ckeditor> -->
-
-
-
-                
                 </div>
               </div>
               <div class="mb-3">
@@ -243,18 +246,33 @@
 
 <script>
 import Modal from "bootstrap/js/dist/modal";
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
+const MAX_WIDTH = 800;
+const MAX_HEIGHT = 450;
+
 export default {
   props: ["product", "isNew"],
-  emits: ["get-data"],
+  emits: ["get-data", "loaded"],
   inject: ["emitter"],
+
   data() {
     return {
+      imageLoaded: false,
+      image: {
+        size: "",
+        height: "",
+        width: "",
+      },
       modal: "",
+      Util: {},
+      check: true,
+      width: "",
+
       tempProduct: {},
       editor: ClassicEditor,
       editorConfig: {
-        toolbar: ['heading', 'typing', 'bold', 'italic', '|', 'link'],
+        toolbar: ["heading", "typing", "bold", "italic", "|", "link"],
       },
     };
   },
@@ -289,7 +307,7 @@ export default {
           this.emitter.emit("push-message", {
             style: "danger",
             title: "更新失敗",
-            content: err.data
+            content: err.data,
           });
         });
     },
@@ -299,58 +317,109 @@ export default {
     hideModal() {
       this.modal.hide();
     },
+
     upload(isMain, event) {
-      //圖片上傳
-      console.dir(event);
+      // 圖片上傳
+      // console.dir(event);
+      // this.imageLoaded = false;
       const file = event.target.files[0];
-      //console.log(file);
-      const formData = new FormData();
-      formData.append("file-to-upload", file);
-      //console.log( formData)
-      this.$http
-        .post(
-          `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/admin/upload`,
-          formData
-        )
-        .then((res) => {
-          if (isMain === "main") {
-            this.tempProduct.imageUrl = res.data.imageUrl;
-            this.$refs.pathClear.value = "";
+      if (!file || file.type.indexOf("image/") !== 0) return;
+      console.log("f", file);
+
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (evt) => {
+        let img = new Image();
+        img.onload = () => {
+          this.image.width = img.width;
+          this.image.height = img.height;
+          this.imageLoaded = true;
+          console.log(this.image);
+          if (this.image.width !== MAX_WIDTH) {
+           // ("圖片寬度不正確");
             this.emitter.emit("push-message", {
-              style: "success",
-              title: "已更新",
-              content: res.data.message,
-            });
-          } else if (
-            isMain === "sub" &&
-            !Array.isArray(this.tempProduct.imagesUrl)
-          ) {
-            this.tempProduct.imagesUrl = [];
-            this.tempProduct.imagesUrl.push(res.data.imageUrl);
-            this.$refs.pathesClear.value = "";
-            this.emitter.emit("push-message", {
-              style: "success",
-              title: "已更新",
-              content: res.data.message,
-            });
-          } else if (
-            isMain === "sub" &&
-            Array.isArray(this.tempProduct.imagesUrl)
-          ) {
-            this.tempProduct.imagesUrl.push(res.data.imageUrl);
-            this.$refs.pathesClear.value = "";
-            this.emitter.emit("push-message", {
-              style: "success",
-              title: "已更新",
-              content: res.data.message,
-            });
+                    style: "error",
+                    title: "圖片格式錯誤",
+                   
+                  });
+            this.imageLoaded = false;
+            return;
           }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+          if (this.image.height !== MAX_HEIGHT) {
+            //  this.imageError = `The image height (${this.image.height}) is too much (max is ${MAX_HEIGHT}).`;
+            //("圖片高度不正確");
+                this.emitter.emit("push-message", {
+                    style: "error",
+                    title: "圖片格式錯誤",
+                   
+                  });
+            this.imageLoaded = false;
+            return;
+          }
+
+          console.log(this.imageLoaded);
+
+          if (this.imageLoaded) {
+            const formData = new FormData();
+            formData.append("file-to-upload", file);
+
+            //console.log( formData)
+            this.$http
+              .post(
+                `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/admin/upload`,
+                formData
+              )
+              .then((res) => {
+                if (isMain === "main") {
+                  this.tempProduct.imageUrl = res.data.imageUrl;
+                  this.$refs.pathClear.value = "";
+                  this.emitter.emit("push-message", {
+                    style: "success",
+                    title: "已更新",
+                    content: res.data.message,
+                  });
+                } else if (
+                  isMain === "sub" &&
+                  !Array.isArray(this.tempProduct.imagesUrl)
+                ) {
+                  this.tempProduct.imagesUrl = [];
+                  this.tempProduct.imagesUrl.push(res.data.imageUrl);
+                  this.$refs.pathesClear.value = "";
+                  this.emitter.emit("push-message", {
+                    style: "success",
+                    title: "已更新",
+                    content: res.data.message,
+                  });
+                } else if (
+                  isMain === "sub" &&
+                  Array.isArray(this.tempProduct.imagesUrl)
+                ) {
+                  this.tempProduct.imagesUrl.push(res.data.imageUrl);
+                  this.$refs.pathesClear.value = "";
+                  this.emitter.emit("push-message", {
+                    style: "success",
+                    title: "已更新",
+                    content: res.data.message,
+                  });
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          } else {
+            return;
+          }
+        };
+        img.src = evt.target.result;
+      };
+
+      reader.onerror = (evt) => {
+        console.error(evt);
+      };
+
     },
   },
+
   mounted() {
     this.modal = new Modal(this.$refs.productModal, {
       keyboard: false,
