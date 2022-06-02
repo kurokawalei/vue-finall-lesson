@@ -10,7 +10,7 @@
         >
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img :src="product.imageUrl" class="d-block w-100" alt="..." />
+              <img :src="product.imageUrl" class="d-block w-100" :alt="product.title" :id="product.id">
             </div>
           </div>
         </div>
@@ -90,10 +90,9 @@
     </div>
     <div class="row my-5">
       {{ product.content }}
-    </div>
 
-    <div class="info mt-3 mb-3">
-      購買前需知
+         <div class="info mt-3 mb-3">
+      
       <ul>
         <li>請留意彩色部份均由人手上色，或會出現色彩濃淡不均勻的情況。</li>
         <li>
@@ -118,8 +117,12 @@
           [產品包裝盒缺陷 ]<br />
           運輸箱損壞若未傷及商品本身則無法提供退貨或換貨的服務
         </li>
+        
       </ul>
     </div>
+    </div>
+
+ 
   </div>
 </template>
 
@@ -207,6 +210,8 @@ export default {
   },
   mounted() {
     this.getProduct();
+    //讓產品回到頂部
+      document.documentElement.scrollTop = 0;
   },
 };
 </script>

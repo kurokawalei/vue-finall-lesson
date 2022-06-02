@@ -3,6 +3,7 @@
   <router-view />
   <Footer></Footer>
   <ToastMessages></ToastMessages>
+  
 </template>
 
 <script>

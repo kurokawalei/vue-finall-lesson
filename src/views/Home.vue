@@ -192,6 +192,7 @@ export default {
 
     this.getArticle();
     this.getProducts();
+    
   },
 };
 </script>

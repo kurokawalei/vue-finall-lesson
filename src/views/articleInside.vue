@@ -50,6 +50,7 @@ export default {
   mounted() {
     this.id = this.$route.params.id;
     this.getarticle();
+        document.documentElement.scrollTop = 0;
   },
 };
 </script>

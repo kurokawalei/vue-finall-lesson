@@ -133,6 +133,12 @@ span.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-da
             height: auto;
         }
     }
+
+    a {
+        &:hover {
+            color: #fff;
+        }
+    }
 }
 
 .swiper-wrapper {
@@ -143,9 +149,66 @@ span.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-da
 }
 
 .info {
+   min-height: 500px;
     ul {
         margin-top: 15px;
         list-style-type: auto;
         font-size: $font*1.2;
     }
+}
+
+.btn-primary {
+    color: #fff;
+}
+
+
+
+
+
+.article-box {
+
+
+a {
+
+    position: relative;
+
+    &:hover:before {
+        opacity: 1;
+        transition: all 0.5s ease;
+    }
+
+    &:before {
+
+        background-color: rgba(0,0,0,.5);
+        content:'立即觀看';
+        color: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        line-height: 250px;
+        font-size: $font*2;
+        transition: all 0.5s ease;
+        opacity: 0;
+       
+
+    }
+  
+    
+
+   
+
+   
+
+  
+
+   
+}
+
+
+
+
+
 }

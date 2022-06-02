@@ -73,6 +73,7 @@ export default {
 
   mounted() {
     this.getArticle();
+  
   },
 };
 </script>
