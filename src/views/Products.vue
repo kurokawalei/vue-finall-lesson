@@ -150,30 +150,49 @@
         <div class="row">
           <div class="col-md-6" v-for="item in productsList" :key="item.id">
             <div class="card border-0 mb-4 position-relative position-relative">
-              <router-link :to="`/product/${item.id}`">
+              <router-link :to="`/product/${item.id}`" title="查看商品">
                 <img
                   :src="item.imageUrl"
                   class="card-img-top rounded-0"
                   :alt="item.title"
                 />
               </router-link>
-              <a href="#" class="text-dark">
-                <i
-                  class="far fa-heart position-absolute"
-                  style="right: 16px; top: 16px"
-                ></i>
-              </a>
+
               <div class="card-body p-0">
-                <h4 class="mb-0 mt-3">
-                  {{ item.title }}
-                </h4>
-                <p class="card-text mb-0">
-                  NT${{ item.price }}
-                  <span class="text-muted ms-2"
-                    ><del>NT${{ item.origin_price }}</del></span
-                  >
-                </p>
-                <p class="text-muted mt-3"></p>
+                <div class="d-flex">
+                  <div class="col">
+                    <h4 class="mb-0 mt-3">
+                      {{ item.title }}
+                    </h4>
+                    <p class="card-text mb-0">
+                      NT${{ item.price }}
+                      <span class="text-muted ms-2"
+                        ><del>NT${{ item.origin_price }}</del></span
+                      >
+                    </p>
+                  </div>
+                  <div class="col-auto align-self-center">
+                    <p class="text-muted text-end mb-0">
+                      <button
+                        v-if="favorite.includes(item.id)"
+                        type="button"
+                        class="btn btn-danger"
+                        @click="saveFav(item.id)"
+                      >
+                        已收藏
+                      </button>
+
+                      <button
+                        v-else
+                        type="button"
+                        class="btn btn-primary"
+                        @click="saveFav(item.id)"
+                      >
+                        收藏商品
+                      </button>
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -220,6 +239,7 @@ export default {
   data() {
     return {
       productsList: [],
+      favorite: JSON.parse(localStorage.getItem("favorite")) || [],
       pageobj: {},
       visible: false,
       isLoading: false,
@@ -248,6 +268,26 @@ export default {
         .catch((er) => {
           console.log(er);
         });
+    },
+    saveFav(id) {
+      const favoriteIndex = this.favorite.findIndex((item) => item === id);
+      if (favoriteIndex === -1) {
+        //如果沒有
+        this.favorite.push(id);
+      } else {
+        //如果有
+        this.favorite.splice(favoriteIndex, 1);
+      }
+
+      console.log(this.favorite);
+    },
+  },
+  watch: {
+    favorite: {
+      handler() {
+        localStorage.setItem("favorite", JSON.stringify(this.favorite));
+      },
+      deep: true,
     },
   },
   mounted() {
