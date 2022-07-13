@@ -1,6 +1,6 @@
 <template>
-  <nav class="d-flex justify-content-center">
-    <ul class="pagination">
+  <nav class="d-flex justify-content-center mt-3">
+    <ul class="pagination pagination-lg">
       <li class="page-item" :class="{ disabled: !pages.has_pre }">
         <a class="page-link" href="javascript:;" aria-label="Previous" @click.prevent=" $emit('getpage', pages.current_page-1 ) ">
           <span aria-hidden="true">&laquo;</span>

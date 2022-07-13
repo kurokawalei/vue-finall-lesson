@@ -176,7 +176,7 @@
                       <button
                         v-if="favorite.includes(item.id)"
                         type="button"
-                        class="btn btn-danger"
+                        class="btn btn-outline-danger"
                         @click="saveFav(item.id)"
                       >
                         已收藏
@@ -185,7 +185,7 @@
                       <button
                         v-else
                         type="button"
-                        class="btn btn-primary"
+                        class="btn btn-outline-primary"
                         @click="saveFav(item.id)"
                       >
                         收藏商品
@@ -199,29 +199,6 @@
         </div>
       </div>
       <pageinfo :pages="pageobj" @getpage="getProducts"></pageinfo>
-    </div>
-  </div>
-
-  <div class="bg-light py-4">
-    <div class="container">
-      <div
-        class="
-          d-flex
-          flex-column flex-md-row
-          justify-content-between
-          align-items-md-center align-items-start
-        "
-      >
-        <p class="mb-0 fw-bold">Lorem ipsum dolor sit amet.</p>
-        <div class="input-group w-md-50 mt-md-0 mt-3">
-          <input type="text" class="form-control rounded-0" placeholder="" />
-          <div class="input-group-append">
-            <button class="btn btn-dark rounded-0" type="button" id="search">
-              Lorem ipsum
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
