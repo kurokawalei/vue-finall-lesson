@@ -165,9 +165,9 @@
                       {{ item.title }}
                     </h4>
                     <p class="card-text mb-0">
-                      NT${{ item.price }}
+                      NT${{ $filters.numberAddComma(item.price)  }}
                       <span class="text-muted ms-2"
-                        ><del>NT${{ item.origin_price }}</del></span
+                        ><del>NT${{   $filters.numberAddComma(item.origin_price) }}</del></span
                       >
                     </p>
                   </div>

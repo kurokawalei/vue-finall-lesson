@@ -10,7 +10,12 @@
         >
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img :src="product.imageUrl" class="d-block w-100" :alt="product.title" :id="product.id">
+              <img
+                :src="product.imageUrl"
+                class="d-block w-100"
+                :alt="product.title"
+                :id="product.id"
+              />
             </div>
           </div>
         </div>
@@ -33,9 +38,11 @@
         </nav>
         <h2 class="fw-bold h1 mb-1">{{ product.title }}</h2>
         <p class="mb-0 text-muted text-end">
-          <del>NT${{ product.origin_price }}元</del>
+          <del>NT${{ $filters.numberAddComma(product.origin_price) }}元</del>
         </p>
-        <p class="h4 fw-bold text-end">NT${{ product.price }}元</p>
+        <p class="h4 fw-bold text-end">
+          NT${{ $filters.numberAddComma(product.price) }}元
+        </p>
         <div class="row align-items-center">
           <div class="col-6">
             <div class="input-group my-3 bg-light rounded">
@@ -91,38 +98,34 @@
     <div class="row my-5">
       {{ product.content }}
 
-         <div class="info mt-3 mb-3">
-      
-      <ul>
-        <li>請留意彩色部份均由人手上色，或會出現色彩濃淡不均勻的情況。</li>
-        <li>
-          由於用戶的電腦設定各有不同，貨品真實顏色及形狀可能與螢幕顯示的略有差異。
-        </li>
-        <li>照片為研發中的試製品，實際商品可能略有差異，請見諒。</li>
-        <li>
-          這產品的生產數量有限, 如已達到預定銷售數量就會終止預訂。敬請見諒。
-        </li>
-        <li>
-          在各地區發行之商品，含有人物角色的版權和安全標誌，為了符合各國相關規格的要求，所以包裝盒上可能貼有各國的版權標籤，請在購買前留意。
-        </li>
-        <li>
-          商品有可能因故變更交貨日期或缺貨而導致寄送延遲，在此狀況下本公司不負任何賠償責任。
-        </li>
-        <li>
-          今後在所有商品頁面標示如SNS及廣告標示與商品頁內容有異時，一切以商品頁內容為最終且最正確的內容。
-        </li>
-        <li>本商品有可能在本公司所主辦的活動或其他企劃中推出販售。</li>
-        <li>服務期限 : 於收取商品當日起計7天後中止</li>
-        <li>
-          [產品包裝盒缺陷 ]<br />
-          運輸箱損壞若未傷及商品本身則無法提供退貨或換貨的服務
-        </li>
-        
-      </ul>
+      <div class="info mt-3 mb-3">
+        <ul>
+          <li>請留意彩色部份均由人手上色，或會出現色彩濃淡不均勻的情況。</li>
+          <li>
+            由於用戶的電腦設定各有不同，貨品真實顏色及形狀可能與螢幕顯示的略有差異。
+          </li>
+          <li>照片為研發中的試製品，實際商品可能略有差異，請見諒。</li>
+          <li>
+            這產品的生產數量有限, 如已達到預定銷售數量就會終止預訂。敬請見諒。
+          </li>
+          <li>
+            在各地區發行之商品，含有人物角色的版權和安全標誌，為了符合各國相關規格的要求，所以包裝盒上可能貼有各國的版權標籤，請在購買前留意。
+          </li>
+          <li>
+            商品有可能因故變更交貨日期或缺貨而導致寄送延遲，在此狀況下本公司不負任何賠償責任。
+          </li>
+          <li>
+            今後在所有商品頁面標示如SNS及廣告標示與商品頁內容有異時，一切以商品頁內容為最終且最正確的內容。
+          </li>
+          <li>本商品有可能在本公司所主辦的活動或其他企劃中推出販售。</li>
+          <li>服務期限 : 於收取商品當日起計7天後中止</li>
+          <li>
+            [產品包裝盒缺陷 ]<br />
+            運輸箱損壞若未傷及商品本身則無法提供退貨或換貨的服務
+          </li>
+        </ul>
+      </div>
     </div>
-    </div>
-
- 
   </div>
 </template>
 
@@ -211,7 +214,7 @@ export default {
   mounted() {
     this.getProduct();
     //讓產品回到頂部
-      document.documentElement.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   },
 };
 </script>

@@ -74,7 +74,7 @@
                 :key="item"
                 class="mb-1 ps-3 pe-3"
               >
-                {{ item.product.title }}|價格：$NT{{ item.product.price }}元
+                {{ item.product.title }}｜單價：$NT{{ item.product.price }}元
               </li>
               <div class="text-center ps-3 pe-3">
                 <router-link class="btn-danger btn mt-2 mb-2 w-100" to="/cart"

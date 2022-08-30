@@ -99,7 +99,7 @@
                     </div>
                   </td>
                   <td class="border-0 align-middle">
-                    <p class="mb-0 ms-auto">NT${{ item.total }}</p>
+                    <p class="mb-0 ms-auto">NT${{ $filters.numberAddComma(item.total) }}</p>
                   </td>
                   <td class="border-0 align-middle">
                     <button
@@ -146,7 +146,7 @@
                       <span class="h6">{{ item.qty }}</span> 件
                     </th>
                     <td class="text-end border-0 px-0 mb-1">
-                      NT${{ item.total }}元
+                      NT${{ $filters.numberAddComma(item.total) }}元
                     </td>
                   </tr>
                 </template>
@@ -182,7 +182,7 @@
 
             <div class="d-flex justify-content-between mt-4">
               <p class="mb-0 h5 fw-bold">總和</p>
-              <p class="mb-0 h5 fw-bold">NT${{ carData.total }}元</p>
+              <p class="mb-0 h5 fw-bold">NT${{ $filters.numberAddComma(carData.total)  }}元</p>
             </div>
             <div class="mt-2 h5 text-end text-success" v-if="isCoupon">
               折扣價：NT${{ Math.trunc(carData.final_total) }}元

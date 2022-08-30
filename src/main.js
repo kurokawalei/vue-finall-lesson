@@ -19,6 +19,7 @@ import CKEditor from '@ckeditor/ckeditor5-vue';
 
 //自訂義message
 import $messageState from '@/methods/messageState';
+import { numberAddComma } from "@/libs/filters";
 
 
 import {
@@ -26,7 +27,8 @@ import {
     Form,
     ErrorMessage,
     defineRule,
-    configure
+    configure,
+    
 } from 'vee-validate'
 // Vee Validate－規則
 import {
@@ -64,6 +66,9 @@ setLocale('zh_TW')
 
 const app = createApp(App);
 
+//千分位
+app.config.globalProperties.$filters = { numberAddComma };
+//訊息
 app.config.globalProperties.$messageState = $messageState;
 
 app.use(VueAxios, axios);
